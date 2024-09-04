@@ -1,0 +1,1 @@
+# Participaci-n6-an-lisis-de-datos-conUMAPyConvexHull
