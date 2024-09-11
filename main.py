@@ -1,4 +1,12 @@
 
+#Codigo que funciona en google colab
+!pip install -U loompy
+!pip install anndata
+!pip install anndata umap-learn scipy matplotlib
+!pip install  umap-learn scipy matplotlib
+!pip install anndata umap-learn scipy matplotlib
+# Importación de las librerías necesarias
+
 import anndata
 import umap
 import numpy as np
@@ -7,6 +15,21 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import scipy.spatial
 from scipy.spatial import ConvexHull
+from google.colab import drive
+drive.mount('/content/drive')
+
+import anndata as ad
+
+# Cargar el archivo .h5ad
+
+rutaDB = '/content/drive/MyDrive/analisis_con_convexhull/base_datos_exp_gen.h5ad'
+adata = ad.read_h5ad(rutaDB)
+
+# Inspeccionar las claves disponibles en obsm y obs
+#print("Claves en obsm:", adata.obsm.keys())
+#print("Claves en obs:", adata.obs.keys())
+
+
 
 # Función para dibujar el hull convexo
 def plot_convex_hull(ax, points, color, alpha=0.3):
@@ -16,12 +39,10 @@ def plot_convex_hull(ax, points, color, alpha=0.3):
     for simplex in hull.simplices:
         ax.plot(points[simplex, 0], points[simplex, 1], color=color, alpha=alpha)
 
-# Cargar los datos
-rutaDB = 'base_datos_exp_gen.h5ad'
-adata = anndata.read_h5ad(rutaDB)
+
 
 # Extraer las coordenadas UMAP y el identificador de cluster
-umap_coords = adata.obsm['X_umap']  # Esto puede variar según el archivo
+umap_coords = adata.obsm['X_UMAP']  
 cluster_ids = adata.obs['cluster_id']
 
 # Crear una figura para la visualización
